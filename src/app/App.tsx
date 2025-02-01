@@ -1,22 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
-import InvoicesList from './components/InvoicesList'
-import InvoiceShow from './components/InvoiceShow'
-
-import GettingStarted from './GettingStarted'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  InvoiceCreatePage,
+  InvoiceReviewPage,
+  InvoiceEditPage,
+  InvoicesListPage,
+} from "./Pages";
 
 function App() {
   return (
     <div className="px-5">
-      <GettingStarted />
       <Router>
         <Routes>
-          <Route path="/invoice/:id" Component={InvoiceShow} />
-          <Route path="/" Component={InvoicesList} />
+          <Route path="/" Component={InvoicesListPage} />
+          <Route path="/invoice/:id" Component={InvoiceReviewPage} />
+          <Route path="/create-invoice" Component={InvoiceCreatePage} />
+          <Route path="/edit-invoice/:id" Component={InvoiceEditPage} />
         </Routes>
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

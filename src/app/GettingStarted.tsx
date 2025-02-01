@@ -1,14 +1,4 @@
-import { useState } from 'react'
-
-import { Customer, Product } from 'types'
-
-import CustomerAutocomplete from 'app/components/CustomerAutocomplete'
-import ProductAutocomplete from 'app/components/ProductAutocomplete'
-
 const GettingStarted = () => {
-  const [customer, setCustomer] = useState<Customer | null>(null)
-  const [product, setProduct] = useState<Product | null>(null)
-
   return (
     <>
       <div className="alert alert-info mt-5 mb-3">
@@ -20,11 +10,11 @@ const GettingStarted = () => {
         <p>It contains notably:</p>
         <ul>
           <li>
-            A page to list all invoices, in{' '}
+            A page to list all invoices, in{" "}
             <code>app/components/InvoicesList/index.tsx</code>
           </li>
           <li>
-            A page to show an invoice{' '}
+            A page to show an invoice{" "}
             <code>app/components/InvoicesShow/index.tsx</code>.
           </li>
           <li>
@@ -45,19 +35,13 @@ const GettingStarted = () => {
         </p>
 
         <p>
-          We've also implemented two components for you : the{' '}
-          <code>ProductAutocomplete</code> and <code>CustomerAutocomplete</code>{' '}
+          We've also implemented two components for you : the{" "}
+          <code>ProductAutocomplete</code> and <code>CustomerAutocomplete</code>{" "}
           that you can try out below.
         </p>
       </div>
-      <div className="mb-3">
-        <CustomerAutocomplete value={customer} onChange={setCustomer} />
-      </div>
-      <div className="mb-5">
-        <ProductAutocomplete value={product} onChange={setProduct} />
-      </div>
     </>
-  )
-}
+  );
+};
 
-export default GettingStarted
+export default GettingStarted;
