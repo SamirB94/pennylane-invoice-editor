@@ -4,7 +4,7 @@ import {
   UnknownParamsObject,
   OperationResponse,
   AxiosRequestConfig,
-} from 'openapi-client-axios'; 
+} from "openapi-client-axios";
 
 declare namespace Components {
   namespace Schemas {
@@ -196,14 +196,14 @@ declare namespace Components {
     export interface InvoiceLineUpdatePayload {
       /**
        * If this parameter is set, the identified invoice_line will be updated (or deleted if _destroy is set to true) If this parameter is not set, a new invoice_line will be created
-       * 
+       *
        * example:
        * 45
        */
       id?: number;
       /**
        * If this parameter is set to true, and if "id" is set, the identified invoice_line will be deleted
-       * 
+       *
        * example:
        * false
        */
@@ -499,126 +499,164 @@ export interface OperationMethods {
   /**
    * getSearchProducts - Search products
    */
-  'getSearchProducts'(
-    parameters?: Parameters<Paths.GetSearchProducts.QueryParameters & Paths.GetSearchProducts.HeaderParameters> | null,
+  "getSearchProducts"(
+    parameters?: Parameters<
+      Paths.GetSearchProducts.QueryParameters &
+        Paths.GetSearchProducts.HeaderParameters
+    > | null,
     data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.GetSearchProducts.Responses.$200>
+    config?: AxiosRequestConfig
+  ): OperationResponse<Paths.GetSearchProducts.Responses.$200>;
   /**
    * getSearchCustomers - Search customers
    */
-  'getSearchCustomers'(
-    parameters?: Parameters<Paths.GetSearchCustomers.QueryParameters & Paths.GetSearchCustomers.HeaderParameters> | null,
+  "getSearchCustomers"(
+    parameters?: Parameters<
+      Paths.GetSearchCustomers.QueryParameters &
+        Paths.GetSearchCustomers.HeaderParameters
+    > | null,
     data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.GetSearchCustomers.Responses.$200>
+    config?: AxiosRequestConfig
+  ): OperationResponse<Paths.GetSearchCustomers.Responses.$200>;
   /**
    * getInvoices - list invoices
    */
-  'getInvoices'(
-    parameters?: Parameters<Paths.GetInvoices.QueryParameters & Paths.GetInvoices.HeaderParameters> | null,
+  "getInvoices"(
+    parameters?: Parameters<
+      Paths.GetInvoices.QueryParameters & Paths.GetInvoices.HeaderParameters
+    > | null,
     data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.GetInvoices.Responses.$200>
+    config?: AxiosRequestConfig
+  ): OperationResponse<Paths.GetInvoices.Responses.$200>;
   /**
    * postInvoices - create an invoice
    */
-  'postInvoices'(
+  "postInvoices"(
     parameters?: Parameters<Paths.PostInvoices.HeaderParameters> | null,
     data?: Paths.PostInvoices.RequestBody,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.PostInvoices.Responses.$200>
+    config?: AxiosRequestConfig
+  ): OperationResponse<Paths.PostInvoices.Responses.$200>;
   /**
    * getInvoice - get an invoice
    */
-  'getInvoice'(
-    parameters?: Parameters<Paths.GetInvoice.PathParameters & Paths.GetInvoice.HeaderParameters> | null,
+  "getInvoice"(
+    parameters?: Parameters<
+      Paths.GetInvoice.PathParameters & Paths.GetInvoice.HeaderParameters
+    > | null,
     data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.GetInvoice.Responses.$200>
+    config?: AxiosRequestConfig
+  ): OperationResponse<Paths.GetInvoice.Responses.$200>;
   /**
    * putInvoice - update an invoice
    */
-  'putInvoice'(
-    parameters?: Parameters<Paths.PutInvoice.PathParameters & Paths.PutInvoice.HeaderParameters> | null,
+  "putInvoice"(
+    parameters?: Parameters<
+      Paths.PutInvoice.PathParameters & Paths.PutInvoice.HeaderParameters
+    > | null,
     data?: Paths.PutInvoice.RequestBody,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.PutInvoice.Responses.$200>
+    config?: AxiosRequestConfig
+  ): OperationResponse<Paths.PutInvoice.Responses.$200>;
   /**
    * deleteInvoice - delete an invoice
    */
-  'deleteInvoice'(
-    parameters?: Parameters<Paths.DeleteInvoice.PathParameters & Paths.DeleteInvoice.HeaderParameters> | null,
+  "deleteInvoice"(
+    parameters?: Parameters<
+      Paths.DeleteInvoice.PathParameters & Paths.DeleteInvoice.HeaderParameters
+    > | null,
     data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<any>
+    config?: AxiosRequestConfig
+  ): OperationResponse<any>;
 }
 
 export interface PathsDictionary {
-  ['/products/search']: {
+  ["/products/search"]: {
     /**
      * getSearchProducts - Search products
      */
-    'get'(
-      parameters?: Parameters<Paths.GetSearchProducts.QueryParameters & Paths.GetSearchProducts.HeaderParameters> | null,
+    "get"(
+      parameters?: Parameters<
+        Paths.GetSearchProducts.QueryParameters &
+          Paths.GetSearchProducts.HeaderParameters
+      > | null,
       data?: any,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.GetSearchProducts.Responses.$200>
-  }
-  ['/customers/search']: {
+      config?: AxiosRequestConfig
+    ): OperationResponse<Paths.GetSearchProducts.Responses.$200>;
+  };
+  ["/customers/search"]: {
     /**
      * getSearchCustomers - Search customers
      */
-    'get'(
-      parameters?: Parameters<Paths.GetSearchCustomers.QueryParameters & Paths.GetSearchCustomers.HeaderParameters> | null,
+    "get"(
+      parameters?: Parameters<
+        Paths.GetSearchCustomers.QueryParameters &
+          Paths.GetSearchCustomers.HeaderParameters
+      > | null,
       data?: any,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.GetSearchCustomers.Responses.$200>
-  }
-  ['/invoices']: {
+      config?: AxiosRequestConfig
+    ): OperationResponse<Paths.GetSearchCustomers.Responses.$200>;
+  };
+  ["/invoices"]: {
     /**
      * getInvoices - list invoices
      */
-    'get'(
-      parameters?: Parameters<Paths.GetInvoices.QueryParameters & Paths.GetInvoices.HeaderParameters> | null,
+    "get"(
+      parameters?: Parameters<
+        Paths.GetInvoices.QueryParameters & Paths.GetInvoices.HeaderParameters
+      > | null,
       data?: any,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.GetInvoices.Responses.$200>
+      config?: AxiosRequestConfig
+    ): OperationResponse<Paths.GetInvoices.Responses.$200>;
     /**
      * postInvoices - create an invoice
      */
-    'post'(
+    "post"(
       parameters?: Parameters<Paths.PostInvoices.HeaderParameters> | null,
       data?: Paths.PostInvoices.RequestBody,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.PostInvoices.Responses.$200>
-  }
-  ['/invoices/{id}']: {
+      config?: AxiosRequestConfig
+    ): OperationResponse<Paths.PostInvoices.Responses.$200>;
+  };
+  ["/invoices/{id}"]: {
     /**
      * putInvoice - update an invoice
      */
-    'put'(
-      parameters?: Parameters<Paths.PutInvoice.PathParameters & Paths.PutInvoice.HeaderParameters> | null,
+    "put"(
+      parameters?: Parameters<
+        Paths.PutInvoice.PathParameters & Paths.PutInvoice.HeaderParameters
+      > | null,
       data?: Paths.PutInvoice.RequestBody,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.PutInvoice.Responses.$200>
+      config?: AxiosRequestConfig
+    ): OperationResponse<Paths.PutInvoice.Responses.$200>;
     /**
      * getInvoice - get an invoice
      */
-    'get'(
-      parameters?: Parameters<Paths.GetInvoice.PathParameters & Paths.GetInvoice.HeaderParameters> | null,
+    "get"(
+      parameters?: Parameters<
+        Paths.GetInvoice.PathParameters & Paths.GetInvoice.HeaderParameters
+      > | null,
       data?: any,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.GetInvoice.Responses.$200>
+      config?: AxiosRequestConfig
+    ): OperationResponse<Paths.GetInvoice.Responses.$200>;
     /**
      * deleteInvoice - delete an invoice
      */
-    'delete'(
-      parameters?: Parameters<Paths.DeleteInvoice.PathParameters & Paths.DeleteInvoice.HeaderParameters> | null,
+    "delete"(
+      parameters?: Parameters<
+        Paths.DeleteInvoice.PathParameters &
+          Paths.DeleteInvoice.HeaderParameters
+      > | null,
       data?: any,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<any>
-  }
+      config?: AxiosRequestConfig
+    ): OperationResponse<any>;
+  };
 }
 
-export type Client = OpenAPIClient<OperationMethods, PathsDictionary>
+export type Client = OpenAPIClient<OperationMethods, PathsDictionary>;
+
+export type InvoiceCreatePayload = Components.Schemas.InvoiceCreatePayload;
+export type InvoiceUpdatePayload = Components.Schemas.InvoiceUpdatePayload;
+export type InvoiceLineCreatePayload =
+  Components.Schemas.InvoiceLineCreatePayload;
+export type InvoiceLineUpdatePayload =
+  Components.Schemas.InvoiceLineUpdatePayload;
+export type Unit = Components.Schemas.Unit;
+export type VatRate = Components.Schemas.VatRate;

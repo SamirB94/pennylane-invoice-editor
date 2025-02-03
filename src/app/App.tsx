@@ -4,7 +4,7 @@ import {
   InvoiceReviewPage,
   InvoiceEditPage,
   InvoicesListPage,
-} from "./Pages";
+} from "./pages";
 
 function App() {
   return (

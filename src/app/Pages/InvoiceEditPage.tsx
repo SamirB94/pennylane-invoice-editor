@@ -1,5 +1,11 @@
+import { InvoiceForm } from "app/components/Invoice";
+
 const InvoiceEditPage = () => {
-  return <div>InvoiceEditPage</div>;
+  return (
+    <div>
+      <InvoiceForm />
+    </div>
+  );
 };
 
 export default InvoiceEditPage;

@@ -8,8 +8,6 @@ import { GroupBase } from "react-select";
 interface CustomerAutocompleteProps {
   value: Customer | null;
   onChange: (Customer: Customer | null) => void;
-  searchValue: string;
-  setSearchValue: (searchValue: string) => void;
   className?: string;
 }
 
@@ -23,8 +21,6 @@ const CustomerAutocomplete = ({
   value,
   onChange,
   className,
-  searchValue,
-  setSearchValue,
 }: CustomerAutocompleteProps) => {
   const api = useApi();
 
@@ -34,10 +30,9 @@ const CustomerAutocomplete = ({
     { page: number }
   > = useCallback(
     async (search, loadedOptions, additional) => {
-      console.log("LOAD OPTIONS: ", loadedOptions);
       const page = additional?.page ?? 1;
       const { data } = await api.getSearchCustomers({
-        query: searchValue ?? "",
+        query: search,
         per_page: 10,
         page,
       });
@@ -49,7 +44,7 @@ const CustomerAutocomplete = ({
         },
       };
     },
-    [api, searchValue]
+    [api]
   );
 
   return (
@@ -60,8 +55,6 @@ const CustomerAutocomplete = ({
       additional={defaultAdditional}
       value={value}
       onChange={onChange}
-      inputValue={searchValue}
-      onInputChange={setSearchValue}
       loadOptions={loadOptions}
       debounceTimeout={300}
     />

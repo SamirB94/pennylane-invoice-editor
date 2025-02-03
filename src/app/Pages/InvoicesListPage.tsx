@@ -1,4 +1,4 @@
-import { InvoicesTable } from "app/components/InvoicesTable";
+import { InvoicesTable } from "app/components/Invoice";
 
 const InvoicesListPage = () => {
   return (

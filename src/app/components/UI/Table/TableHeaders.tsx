@@ -1,4 +1,6 @@
-const InvoicesTableHeader = ({ headers }: { headers: string[] }) => {
+const TableHeaders = ({ headers }: { headers: string[] }) => {
+  if (!headers) return null;
+
   return (
     <thead>
       <tr>
@@ -10,4 +12,4 @@ const InvoicesTableHeader = ({ headers }: { headers: string[] }) => {
   );
 };
 
-export default InvoicesTableHeader;
+export default TableHeaders;
