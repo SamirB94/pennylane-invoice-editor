@@ -1,24 +1,13 @@
 import { useApi } from "api";
-import { Customer, Invoice, Product } from "types";
+import { Customer, Invoice, Pagination } from "types";
 import { useEffect, useCallback, useState } from "react";
 import { CustomerAutocomplete } from "../Autocomplete";
 import Table from "../UI/Table/Table";
-import { mapBooleanValues } from "app/utils/invoiceUtils";
-import { useNavigate } from "react-router-dom";
+import { mapInvoiceToTableData } from "app/utils/invoiceUtils";
 import { Button } from "react-bootstrap";
-
-enum InvoicesTableHeaders {
-  Id = "Id",
-  Customer = "Customer",
-  Address = "Address",
-  Total = "Total",
-  Tax = "Tax",
-  Finalized = "Finalized",
-  Paid = "Paid",
-  Date = "Date",
-  Deadline = "Deadline",
-  Actions = "",
-}
+import { Link } from "react-router-dom";
+import PopoverActionButtons from "../UI/Button/PopoverActionButtons";
+import InvoiceActionButtons from "./InvoiceActionButtons";
 
 type Filter = {
   field: string;
@@ -28,18 +17,20 @@ type Filter = {
 
 const InvoicesTable = (): React.ReactElement => {
   const api = useApi();
-  const navigate = useNavigate();
 
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [invoicesList, setInvoicesList] = useState<Invoice[]>([]);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
   const [filters, setFilters] = useState<Filter[]>([]);
 
   const fetchInvoices = useCallback(async () => {
     try {
       const { data } = await api.getInvoices({
+        ...pagination,
         filter: JSON.stringify(filters),
       });
       setInvoicesList(data.invoices);
+      setPagination(data.pagination);
     } catch (error) {
       console.log(error);
     }
@@ -48,39 +39,6 @@ const InvoicesTable = (): React.ReactElement => {
   useEffect(() => {
     fetchInvoices();
   }, [fetchInvoices]);
-
-  const prepareTableData = (invoices: Invoice[]) => {
-    if (invoices.length > 0) {
-      return {
-        headers: Object.values(InvoicesTableHeaders) as string[],
-        rows: invoices.map((invoice: Invoice) => ({
-          id: invoice.id,
-          customer: `${invoice.customer?.first_name} ${invoice.customer?.last_name}`,
-          address: `${invoice.customer?.address}, ${invoice.customer?.zip_code} ${invoice.customer?.city}`,
-          total: invoice.total,
-          tax: invoice.tax,
-          finalized: mapBooleanValues(invoice.finalized),
-          paid: mapBooleanValues(invoice.paid),
-          date: invoice.date,
-          deadline: invoice.deadline,
-          actions: (
-            <Button
-              className="btn-sm"
-              variant="outline-secondary"
-              type="button"
-            >
-              ...
-            </Button>
-          ),
-        })),
-      };
-    }
-
-    return {
-      headers: Object.values(InvoicesTableHeaders),
-      rows: [],
-    };
-  };
 
   const handleCustomerChange = (customer: Customer | null) => {
     setFilters((prevFilters: Filter[]) => {
@@ -95,43 +53,73 @@ const InvoicesTable = (): React.ReactElement => {
     setCustomer(customer);
   };
 
+  const handleDeleteInvoice = (id: number) => {
+    try {
+      api.deleteInvoice(id).then(() => {
+        fetchInvoices();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const preparedTableData = mapInvoiceToTableData(
+    invoicesList,
+    (invoice: Invoice) => (
+      <PopoverActionButtons
+        children={
+          <InvoiceActionButtons
+            invoice={invoice}
+            handleDeleteInvoice={handleDeleteInvoice}
+          />
+        }
+      />
+    )
+  );
+
   const handleClearFilters = () => {
     setFilters([]);
     setCustomer(null);
   };
 
-  const handleRowClick = (value: any) => {
-    const { id, customer } = value;
-    if (!id) return;
-    console.log(value);
-    navigate(`/edit-invoice/${id}`, {
-      state: customer,
-    });
-    // navigate(`/edit-invoice/${id}`); // probably will have buttons for edit: /edit-invoice/:id , create: /create-invoice
-  };
+  const tableOptions = (
+    <div className="row mb-3">
+      <CustomerAutocomplete
+        className="col-md-4"
+        value={customer}
+        onChange={handleCustomerChange}
+      />
+      <Button variant="primary col-md-2">
+        <Link className="text-reset text-decoration-none" to="/create-invoice">
+          Add Invoice
+        </Link>
+      </Button>
+      {customer && (
+        <Button
+          className="btn-sm col-md-2"
+          variant="outline-secondary"
+          type="button"
+          onClick={handleClearFilters}
+        >
+          Clear filters
+        </Button>
+      )}
+    </div>
+  );
 
   return (
     <div>
-      <div className="row justify-content-end mb-3">
-        {customer && (
-          <Button
-            className="btn-sm col-md-2"
-            variant="outline-secondary"
-            type="button"
-            onClick={handleClearFilters}
-          >
-            Clear filters
-          </Button>
-        )}
-        <CustomerAutocomplete
-          className="col-md-4"
-          value={customer}
-          onChange={handleCustomerChange}
-        />
-      </div>
       <Table
-        data={prepareTableData(invoicesList)}
-        onRowClick={handleRowClick}
+        data={preparedTableData}
+        fallbackContent={
+          //should be in component probably
+          <tr>
+            <td colSpan={6}>No invoices found</td>
+          </tr>
+        }
+        pagination={pagination}
+        setPagination={setPagination}
+        options={tableOptions}
       />
     </div>
   );

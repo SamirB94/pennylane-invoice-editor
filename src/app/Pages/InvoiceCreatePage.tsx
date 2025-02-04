@@ -1,6 +1,7 @@
 import { InvoiceForm } from "app/components/Invoice";
+import { FC } from "react";
 
-const InvoiceCreatePage = () => {
+const InvoiceCreatePage: FC = () => {
   return (
     <div>
       <InvoiceForm />

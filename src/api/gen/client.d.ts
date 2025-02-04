@@ -651,12 +651,3 @@ export interface PathsDictionary {
 }
 
 export type Client = OpenAPIClient<OperationMethods, PathsDictionary>;
-
-export type InvoiceCreatePayload = Components.Schemas.InvoiceCreatePayload;
-export type InvoiceUpdatePayload = Components.Schemas.InvoiceUpdatePayload;
-export type InvoiceLineCreatePayload =
-  Components.Schemas.InvoiceLineCreatePayload;
-export type InvoiceLineUpdatePayload =
-  Components.Schemas.InvoiceLineUpdatePayload;
-export type Unit = Components.Schemas.Unit;
-export type VatRate = Components.Schemas.VatRate;
