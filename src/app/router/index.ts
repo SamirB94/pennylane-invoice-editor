@@ -3,7 +3,7 @@ import {
   InvoiceReviewPage,
   InvoiceCreatePage,
   InvoiceEditPage,
-} from "app/pages";
+} from "../../app/pages";
 import { RouteKeys, RoutePaths, RouteLabels } from "./constants";
 
 interface Route {

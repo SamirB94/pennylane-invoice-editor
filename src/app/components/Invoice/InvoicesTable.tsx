@@ -34,7 +34,7 @@ const InvoicesTable = (): React.ReactElement => {
     } catch (error) {
       console.log(error);
     }
-  }, [api, filters]);
+  }, [api, filters, pagination]);
 
   useEffect(() => {
     fetchInvoices();

@@ -14,7 +14,7 @@ const TableRows = ({ rows, fallbackContent, onRowClick }: TableRowProps) => {
       {rows.map((row: { [key: string]: any }) => {
         return (
           <tr
-            key={row.id}
+            key={row.id ?? row}
             className="pointer"
             onClick={() => onRowClick && onRowClick(row)}
             role="button"

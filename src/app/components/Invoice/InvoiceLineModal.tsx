@@ -98,9 +98,6 @@ const InvoiceLineModal = ({
     setValue("label", product?.label);
   };
 
-  console.log("LINE: ", invoiceLine);
-  console.log("PRODUCT: ", product);
-
   return (
     <Modal show={show} onHide={hideModal}>
       <ModalHeader>

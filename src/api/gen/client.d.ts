@@ -1,7 +1,6 @@
 import {
   OpenAPIClient,
   Parameters,
-  UnknownParamsObject,
   OperationResponse,
   AxiosRequestConfig,
 } from "openapi-client-axios";
