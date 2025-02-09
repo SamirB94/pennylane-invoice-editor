@@ -1,121 +1,86 @@
-# jean_test_front
+Potential Advanced Features for the Invoice Editor
 
-This repository contains the guidelines for the frontend interview question, as well as a repository skeleton with which to start.
-
-## Your mission
-
-> ***Implement an invoice editor with React***
-
-### Objectives
-
-The goal is to leverage an existing REST HTTP API to build the prototype of an invoicing editor.
-
-This prototype allows users to perform simple actions around their invoices:
-
-- List existing invoices with relevant details
-- Create new invoices
-- Manage existing invoices
-  - Finalize invoices
-  - Delete invoices
- 
-We do not expect the prototype to be UI-rich as we'll mainly focus on code quality & user experience. We expect you to adopt standard coding practices & setup, including testing, as if you were working on a real application with other coworkers.
-
-Feel free to use pre-installed dependencies or add new ones if you have a legitimate use of them.
-
-However, we want you to:
-
-- Rely on Bootstrap as UI library & [`react-bootstrap`](https://react-bootstrap.github.io/)
-- NOT rely on state management librairies (eg. `redux`)
-
-Please take the time to identify advanced features that could be useful for an invoice editor & write down tech improvements/ideas you could work on.
-
-For each feature/tech improvement, we want to understand:
-
-- What led you to think about this
-- Why it would be useful
-- A potential prototype implementation (feel free to work around API limitations)
-- What might be missing for you to implement it (API limitations, technical constraints)
-
-### Getting started
-
-```sh
-git clone git@github.com:pennylane-hq/jean_test_front.git
-
-cd jean_test_front
-
-yarn
-
-yarn start
-```
-
-### Deliverable
-
-- Create a private GitHub repository containing the source code of your application
-- Invite the following GitHub users to it: `@gterral` `@soyoh` `@greeeg` `@thecodehunter` `@bastienvalentin` `@Juleffel` `@andreitertiscu`
-- Deploy the application using any PaaS like Vercel, Netlify, Heroku, personal server, etc.
-- Submit links to the above [via this form](https://forms.gle/siH7Rezuq2V1mUJGA)
-
-## What you're working with
-
-### Data model
-
-The REST API contains 4 resources: customers, products, invoices & invoice lines.
-
-Side notes:
-
-- Invoices contain multiple invoice lines.
-- Invoice lines are accessed via their invoice. To update them, use the relevant invoice API endpoints.
-- Once the `finalized` field is set to `true` for invoices, no field may be modified except for `paid`.
-
-The REST API base URL is `https://jean-test-api.herokuapp.com/`.
-Each API call must be authenticated using a `X-SESSION` header with the provided token.
-
-An OpenAPI definition for this REST API is avaible [here](https://jean-test-api.herokuapp.com/api-docs/index.html).
-
-The invoices list endpoint supports a `filter` query param which can be used as described in [our external API documentation](https://pennylane.readme.io/docs/how-to-set-up-filters).
-
-### API client
-
-An API client based on `openapi-client-axios` is available through a React Context set up in `src/app/index.tsx`. The context can be consumed using the `useApi` hook. Before using it, please add the token you received in `/src/app/index.tsx`. If you do not have one, please contact us.
-
-```tsx
-ReactDOM.render(
-  <ApiProvider
-    url="https://jean-test-api.herokuapp.com/"
-    token="" // set your api token here
-  >
-    <App />
-  </ApiProvider>
-);
-```
-
-```tsx
-import { useEffect } from "react";
-import { useApi } from "api";
-
-const FooComponent = () => {
-  const api = useApi();
-
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await api.getInvoices();
-    }
-
-    fetch();
-  })
-
-  return <div>bar</div>;
-}
-```
-
-### Repository contents
-
-This repository has been initialized with [create-react-app](https://github.com/facebook/create-react-app). It is to be used as a starting point for developing the prototype.
-
-A set of packages has been included in [package.json](./package.json), please feel free to use them. Their usage is optional; you are not expected to learn any new libraries for this test.
-
-As much as possible, please avoid introducing new dependencies - if you find this necessary, please explain why.
-
-You'll find the `InvoicesList` component already started in the `components` folder.
-
-If you prefer to use JavaScript without typing, you can execute the command `yarn eject_ts`
+1. Recurring Invoices & Subscription Billing
+   - Overview
+     Enables users to automate recurring invoices for subscription-based services.
+     Supports customizable billing cycles (weekly, monthly, annually).
+   - Why It’s Useful
+     Saves time by eliminating repetitive manual invoicing.
+     Ensures timely payments without requiring manual follow-ups.
+   - Implementation Approach
+     Introduce a “Recurring Invoice” option with frequency settings.
+     Use scheduled tasks (e.g., cron jobs) to auto-generate invoices.
+     Allow users to manage subscription details, such as pricing and renewal terms.
+2. Multi-Currency Support & Automatic Conversion
+   - Overview
+     Supports invoice generation in multiple currencies.
+     Fetches real-time exchange rates for accurate conversions.
+   - Why It’s Useful
+     Essential for businesses with international clients.
+     Reduces manual currency conversion errors and discrepancies.
+   - Implementation Approach
+     Integrate an API (e.g., Open Exchange Rates or XE) for live exchange rates.
+     Allow users to set a default currency for each client.
+     Display both the original and converted amounts for transparency.
+3. Digital Signatures & Approval Workflow
+   - Overview
+     Enables users and clients to digitally sign invoices before finalization.
+     Implements a multi-step approval process for enhanced oversight.
+   - Why It’s Useful
+     Strengthens document authenticity and legal validity.
+     Ensures invoices are reviewed and approved before being sent.
+   - Implementation Approach
+     Integrate an e-signature API (e.g., DocuSign, HelloSign).
+     Add an "Approval Required" toggle for invoices needing verification.
+4. AI-Powered Auto-Fill & Data Extraction
+   - Overview
+     Uses AI to extract invoice details from uploaded documents or emails.
+     Suggests commonly used customer or product details to speed up entry.
+   - Why It’s Useful
+     Reduces manual data entry and minimizes human errors.
+     Accelerates the invoice creation process.
+   - Implementation Approach
+     Integrate an OCR (Optical Character Recognition) library for document scanning.
+     Use AI models to analyze and auto-fill invoice fields.
+     Implement predictive suggestions based on past invoices.
+5. Bulk Invoice Management
+   - Overview
+     Allows users to modify, finalize, or delete multiple invoices at once.
+     Supports bulk actions such as marking invoices as paid or finalized.
+   - Why It’s Useful
+     Saves time for businesses handling a high volume of invoices.
+     Reduces repetitive tasks and improves workflow efficiency.
+   - Implementation Approach
+     Implement checkboxes for bulk selection.
+     Add a “Bulk Actions” dropdown for quick editing, exporting, or finalizing.
+     Support CSV/Excel imports for batch invoice creation.
+6. Payment Integration & Status Tracking
+   - Overview
+     Enables direct payment processing through integrations with Stripe, PayPal, etc.
+     Automatically updates invoice status upon successful payment.
+   - Why It’s Useful
+     Provides a seamless payment experience for customers.
+     Eliminates the need for manual payment tracking.
+   - Implementation Approach
+     Add a “Pay Now” button linking to a payment gateway.
+     Implement Webhooks to update invoice status in real time.
+7. Customizable Invoice Templates
+   - Overview
+     Allows users to choose or design invoice layouts to match their branding.
+     Supports custom logos, colors, and styles.
+   - Why It’s Useful
+     Enhances brand identity and professionalism.
+     Provides flexibility in invoice presentation.
+   - Implementation Approach
+     Offer multiple pre-built Bootstrap templates.
+     Allow users to modify templates using a simple editor.
+8. Email & Notification System
+   - Overview
+     Automates invoice email delivery with attachments.
+     Notifies clients of upcoming or overdue payments.
+   - Why It’s Useful
+     Enhances customer experience with timely notifications.
+     Reduces the likelihood of missed payments.
+   - Implementation Approach
+     Implement an email notification system using services like SendGrid or Nodemailer.
+     Allow users to schedule reminders for unpaid invoices.
